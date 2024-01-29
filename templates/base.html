@@ -30,16 +30,16 @@
                     Categories
                     </a>
                     <ul class="dropdown-menu">
-                        {% for i  in categories  %}  
+                        {% for i in categories  %}  
                          {% comment %} categories key name from views {% endcomment %}
-                          <li><a class="dropdown-item" href="#">{{i}} </a></li>
+                          <li><a class="dropdown-item" href="{% url "article:categorised_article" i.id %}" >{{i}} </a></li>
  
                         
                         {% endfor %}
                     
                     
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">All</a></li>
+                    <li><a class="dropdown-item" href="{% url "article:categorised_article" 0 %}">All</a></li>
                     </ul>
                 </li>
                 </ul>
