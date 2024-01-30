@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container' >
+        <form action='' method='POST' enctype='multi-part/form-data'> 
+            {% comment %} enctype='multi-part/form-data' (To accept image) {% endcomment %}
+            {% csrf_token %}
+            {% for field in form  %}
+            <div style='width:30%;' class=''>
+                <div class='form.label mt-2 fw-bold'>
+                    {{field.label}}
+                </div>
+                <div class='form-control my-2 shadow'>
+                    {{field}}
+                </div>
+            </div>
+            {% endfor %}
+            
+            <button type='submit' class='btn btn-success'>Submit</button>
+        </form>
+    </div>
+
+{% endblock content %}

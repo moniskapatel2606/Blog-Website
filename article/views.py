@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -36,8 +37,24 @@ def categorised_article(request,pk):
         'category':'all'}
     else:
         categories=category.objects.get(pk=pk)
-        article=Article.objects.filter(category=categories).all()
+        
+        article=Article.objects.filter(category=categories).all()# (that up variable name categories)
         context={
             'articles':article,
             'category':categories}
     return render(request,'article/categorised_article.html', context)
+
+def post_articleform(request):
+
+    form=ArticleForm()
+    if request.method=='POST':
+      form=ArticleForm(request.POST,request.FILES)
+      if form.is_valid():
+          
+          form.save()
+          return redirect('article:single_article',pk=form.instance.id)
+   
+    context={
+        'form':form
+    }
+    return render(request,'article/article_form.html',context)
