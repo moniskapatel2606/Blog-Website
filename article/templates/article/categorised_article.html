@@ -9,7 +9,7 @@
       {% for article in articles  %}
         <a class='row text-decoration-none text-dark my-3' href="{% url "article:single_article" article.id %}">
             <div class='image col-4'>
-                <img style='width:90%' src="{{article.image.url}}" alt='Image of {{article.title}}'>
+                <img style='width:85%' src="{{article.image.url}}" alt='Image of {{article.title}}'>
             </div>
             <div class='contents col-8'>
                 <h5>{{article.title}}</h5>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -44,13 +45,15 @@ def categorised_article(request,pk):
             'category':categories}
     return render(request,'article/categorised_article.html', context)
 
+@login_required
 def post_articleform(request):
 
     form=ArticleForm()
     if request.method=='POST':
       form=ArticleForm(request.POST,request.FILES)
       if form.is_valid():
-          
+          article=form.save(commit=False)
+          article.author=request.user
           form.save()
           return redirect('article:single_article',pk=form.instance.id)
    
@@ -58,3 +61,16 @@ def post_articleform(request):
         'form':form
     }
     return render(request,'article/article_form.html',context)
+
+def create_article(request):
+    form=ArticleForm()
+    if request.method=='POST':
+        form=ArticleForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('article:index')
+    context={
+        'form':form
+    }
+
+    return render(request,"article/article_form.html",context)

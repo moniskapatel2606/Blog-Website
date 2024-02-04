@@ -2,11 +2,14 @@
 
 {% block content %}
     <div class="container">
-        <h2 class="mt-4" style="width:90%;">{{article.title}}</h2>
-        <h5>Published on :{{article.pub_date}} </h5>
-        <img  class='my-5'style="width:60%;" src="{{article.image.url}}" alt="">
-        <p style="width:90%;">{{article.content}}</p>
-
+        <h2 class="mt-4" style="width:80%;">{{article.title}}</h2>
+        <h5 class='m-2'>
+            By:<a class="text-decoration-none" href="{% url "Users:author_profile"  article.author.id%} ">
+                    {{article.author}}
+                </a> on {{article.pub_date}} 
+        </h5>
+        <img  class='my-4'style="width:60%;" src="{{article.image.url}}" alt="">
+        <p style="width:80%;">{{article.content}}</p>
 
     </div>
 

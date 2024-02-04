@@ -2,21 +2,22 @@
 
 {% block content %}
     <div class='container' >
-        <form action='' method='POST' enctype='multi-part/form-data'> 
+        <h3 class="mx-1 my-3 fw-bold text-success">Post a article</h3>
+        <form style="width:60%;" action='' method='POST' enctype='multi-part/form-data'> 
             {% comment %} enctype='multi-part/form-data' (To accept image) {% endcomment %}
             {% csrf_token %}
             {% for field in form  %}
-            <div style='width:30%;' class=''>
-                <div class='form.label mt-2 fw-bold'>
+            <div class=''>
+                <div class='form-label mt-2 mx-1 fw-bold text-dark'>
                     {{field.label}}
                 </div>
-                <div class='form-control my-2 shadow'>
+                <div class='my-2'>
                     {{field}}
                 </div>
             </div>
             {% endfor %}
             
-            <button type='submit' class='btn btn-success'>Submit</button>
+            <button type='submit' class='btn btn-success mx-1 rounded-0'>Submit</button>
         </form>
     </div>
 
