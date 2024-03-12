@@ -22,7 +22,12 @@ def register(request):
     return render(request,'Users/register.html',context)
 
 def  profile(request):
-    return render(request,'Users/profile.html')
+    articles=Article.objects.filter(author=request.user).all().order_by('-pub_date')
+    context={
+        'articles':articles
+    }
+    return render(request,'Users/profile.html',context)
+
 
 def edit_profile(request):
     try:
